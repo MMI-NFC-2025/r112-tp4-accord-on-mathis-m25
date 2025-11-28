@@ -1,3 +1,85 @@
 /**
 * Accordeon
 */
+
+/* --- 1. MISE EN PAGE HORIZONTALE (Desktop > 768px) --- */
+.accordeon {
+    display: flex;
+    gap: 30px; 
+    align-items: flex-start;
+}
+
+.accordeon details {
+    max-width: 300px;
+    transition: none; 
+    position: relative;
+}
+
+/* --- 2. STYLE DU SUMMARY (Triangle Personnalisé et Rotation) --- */
+details summary {
+    cursor: pointer;
+    list-style: none; 
+    outline: none;
+    display: block; 
+    line-height: 0; 
+}
+
+details summary img {
+    display: block;
+    max-width: 100%;
+    height: auto; 
+}
+
+details summary::-webkit-details-marker,
+details summary::marker {
+    display: none; 
+}
+
+details summary::before {
+    content: "►";
+    display: inline-block;
+    margin-right: 0.5em;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease-in-out;
+    
+    position: absolute; 
+    top: 5px; 
+    left: -20px; 
+    font-size: 1.2em;
+}
+details[open] summary::before {
+    transform: rotate(90deg);
+}
+
+/* --- 3. ANIMATION DU CONTENU (Glissement vertical) --- */
+details .content {
+    max-height: 0; 
+    overflow: hidden; 
+    
+    transition: max-height 0.3s ease-out; 
+    
+    padding-top: 0; 
+    margin-top: 0;
+    padding-left: 0;
+}
+
+details[open] .content {
+    max-height: 500px; 
+    padding-top: 15px; 
+}
+
+/* --- 4. RÈGLES RESPONSIVES (Mobile < 768px) --- */
+@media (max-width: 768px) {
+    
+    .accordeon {
+        display: block;
+        gap: 0; 
+        align-items: unset; 
+    }
+
+    .accordeon details {
+        max-width: 100%;
+        margin-right: 0; 
+        margin-bottom: 20px;
+    }
+}
